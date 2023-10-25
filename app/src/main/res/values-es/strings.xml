@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MiStoryApp</string>
+
+    <string name="signup">Registrarse</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="message_welcome_page">¿Quiere aprender sobre Android, iOS, aprendizaje automático, nube, front-end, back-end y otros campos de TI? ¡Simplemente codifícalo!</string>
+    <string name="title_welcome_page">¡Bienvenido a Dicoding!</string>
+    <string name="title_signup_page">Completa tus datos a continuación</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="message_login_page">Ingrese sus datos primero</string>
+    <string name="title_login_page">¿Estás listo para mejorar tus habilidades?</string>
+    <string name="name">Nombre</string>
+    <string name="message_main_page">Feliz aprendizaje en codificación.</string>
+    <string name="greeting">Hola %1$s,</string>
+    <string name="logout">Cerrar sesión</string>
+
+
+    <string name="empty_username_warning">Primero introduzca su nombre de usuario.</string>
+    <string name="empty_email_warning">Primero introduzca su correo electrónico.</string>
+    <string name="empty_password_warning">Primero ingrese la contraseña.</string>
+    <string name="empty_image_warning">Primero ingrese el archivo de imagen.</string>
+
+    <string name="empty_text_warning">Primero introduzca su nombre de usuario, correo electrónico y contraseña.</string>
+
+    <string name="error_password">Contraseña de menos de 8 caracteres</string>
+    <string name="title_activity_main2">Actividad principal2</string>
+    <string name="title_home">Casa</string>
+    <string name="title_dashboard">Panel</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="title_activity_main">Actividad principal</string>
+    <string name="title_name">Decodificación</string>
+    <string name="desc_stories">"Lorem Ipsum es simplemente texto de relleno de la industria de la impresión y la composición tipográfica. Lorem Ipsum ha sido el "</string>
+    <string name="menu_settings">configuración del menú</string>
+    <string name="text_email">Ingrese correo electrónico</string>
+    <string name="camera">Cámara</string>
+    <string name="gallery">Galería</string>
+    <string name="upload">Subir</string>
+    <string name="description">Descripción</string>
+    <string name="menu_darkmode">Modo oscuro</string>
+    <string name="menu_lightMode">Modo de luz</string>
+    <string name="appwidget_text">IMAGEN DE LA HISTORIA</string>
+    <string name="add_widget">Agregar widget</string>
+    <string name="app_widget_description">Esta es la descripción del widget de una aplicación</string>
+    <string name="empty_text">SIN DATOS</string>
+    <string name="sure_logout">¿Está seguro de que desea continuar cerrando sesión?</string>
+    <string name="continues">Continuar</string>
+    <string name="succeed">¡Sí! Éxito</string>
+    <string name="succeed_message">La cuenta ya está lista. Vamos, inicia sesión y mira la historia.</string>
+    <string name="submit">Submit</string>
+    <string name="text_password">Introducir la contraseña</string>
+
+</resources>

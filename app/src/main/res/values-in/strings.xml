@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aplikasi Cerita Saya</string>
+
+    <string name="signup">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="message_welcome_page">Mau belajar Android, iOS, Machine Learning, Cloud, Front-End, Back-End, dan bidang IT lainnya? Di Dicoding aja!</string>
+    <string name="title_welcome_page">Selamat datang di Dicoding!</string>
+    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="message_login_page">Masukkan dulu datamu ya</string>
+    <string name="title_login_page">Sudah siap untuk upgrade skill?</string>
+    <string name="name">Nama</string>
+    <string name="message_main_page">Selamat Belajar di Dicoding.</string>
+    <string name="greeting">Halo %1$s,</string>
+    <string name="logout">Keluar</string>
+
+
+    <string name="empty_username_warning">Silakan masukkan username terlebih dahulu.</string>
+    <string name="empty_email_warning">Silakan masukkan email terlebih dahulu.</string>
+    <string name="empty_password_warning">Silakan masukkan password terlebih dahulu.</string>
+    <string name="empty_image_warning">Silakan masukkan berkas gambar terlebih dahulu.</string>
+
+    <string name="empty_text_warning">Silakan masukkan username, email, dan password terlebih dahulu.</string>
+
+    <string name="error_password">Password Kurang dari 8 Karakter</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_name">Dicoding</string>
+    <string name="desc_stories">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the "</string>
+    <string name="menu_settings">menu settings</string>
+    <string name="text_email">Masukan Email</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="upload">Unggah</string>
+    <string name="description">Deskripsi</string>
+    <string name="menu_darkmode">Dark Mode</string>
+    <string name="menu_lightMode">Light Mode</string>
+    <string name="appwidget_text">STORY IMAGE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="sure_logout">Anda Yakin Untuk Melanjutkan Logout?</string>
+    <string name="continues">Lanjut</string>
+    <string name="succeed">Yeah! Berhasil</string>
+    <string name="succeed_message">Akun sudah jadi nih. Yuk, login dan Lihat Story.</string>
+    <string name="submit">Submit</string>
+    <string name="text_password">Masukan Password</string>
+
+
+</resources>
