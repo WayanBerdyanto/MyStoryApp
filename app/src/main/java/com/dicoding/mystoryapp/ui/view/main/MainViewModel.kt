@@ -31,9 +31,4 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
             repository.saveThemeSetting(saveThemeSetting)
         }
     }
-
-
-
-
-
 }

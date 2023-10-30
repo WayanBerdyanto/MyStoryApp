@@ -30,7 +30,7 @@ class UserRepository private constructor(
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, RegisterResponse::class.java)
             emit(ResultState.Error(errorResponse.message))
-        } catch (e: Exception){
+        } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
         }
     }
@@ -44,7 +44,7 @@ class UserRepository private constructor(
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
             emit(ResultState.Error(errorResponse.message))
-        }catch (e: Exception){
+        } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
         }
 
@@ -59,7 +59,7 @@ class UserRepository private constructor(
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, StoriesResponse::class.java)
             emit(ResultState.Error(errorResponse.message))
-        }catch (e: Exception){
+        } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
         }
     }
@@ -73,21 +73,35 @@ class UserRepository private constructor(
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, DetailStoryResponse::class.java)
             emit(ResultState.Error(errorResponse.message))
-        }catch (e: Exception){
+        } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
         }
     }
 
-    fun uploadImage(file: MultipartBody.Part, description: RequestBody)= liveData{
+    fun uploadImage(file: MultipartBody.Part, description: RequestBody) = liveData {
         emit(ResultState.Loading)
         try {
             val successResponse = apiService.uploadImage(file, description)
             emit(ResultState.Success(successResponse))
-        } catch (e: HttpException){
+        } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, PostStoriesResponse::class.java)
             emit(ResultState.Error(errorResponse.message))
-        }catch (e: Exception){
+        } catch (e: Exception) {
+            emit(ResultState.Error(e.message.toString()))
+        }
+    }
+
+    fun getStoriesWithLocation(location: Int) = liveData {
+        emit(ResultState.Loading)
+        try {
+            val successResponse = apiService.getStoriesWithLocation(location)
+            emit(ResultState.Success(successResponse))
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val errorResponse = Gson().fromJson(errorBody, PostStoriesResponse::class.java)
+            emit(ResultState.Error(errorResponse.message))
+        } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
         }
     }
@@ -105,11 +119,11 @@ class UserRepository private constructor(
         userPreference.logout()
     }
 
-    fun getThemeSetting(): Flow<Boolean>{
+    fun getThemeSetting(): Flow<Boolean> {
         return userPreference.getThemeSetting()
     }
 
-    suspend fun saveThemeSetting(isDarkModeActive: Boolean){
+    suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
         userPreference.saveThemeSetting(isDarkModeActive)
     }
 

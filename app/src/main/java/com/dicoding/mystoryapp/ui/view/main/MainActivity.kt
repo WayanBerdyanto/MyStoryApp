@@ -19,6 +19,7 @@ import com.dicoding.mystoryapp.ui.StoryAdapter
 import com.dicoding.mystoryapp.ui.ViewModelFactory
 import com.dicoding.mystoryapp.ui.galery.GaleryActivity
 import com.dicoding.mystoryapp.ui.view.login.LoginActivity
+import com.dicoding.mystoryapp.ui.view.map.MapsActivity
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -79,6 +80,12 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.menu_settings -> {
                     startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+                    true
+                }
+
+                R.id.menu_map ->{
+                    val intent = Intent(this@MainActivity, MapsActivity::class.java)
+                    startActivity(intent)
                     true
                 }
 
