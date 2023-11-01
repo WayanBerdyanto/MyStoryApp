@@ -9,18 +9,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.mystoryapp.R
 import com.dicoding.mystoryapp.ResultState
-import com.dicoding.mystoryapp.data.remote.response.ListStoryItem
 import com.dicoding.mystoryapp.databinding.ActivityMainBinding
+import com.dicoding.mystoryapp.ui.LoadingStateAdapter
 import com.dicoding.mystoryapp.ui.StoryAdapter
 import com.dicoding.mystoryapp.ui.ViewModelFactory
 import com.dicoding.mystoryapp.ui.galery.GaleryActivity
 import com.dicoding.mystoryapp.ui.view.login.LoginActivity
 import com.dicoding.mystoryapp.ui.view.map.MapsActivity
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainViewModel> {
@@ -83,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.menu_map ->{
+                R.id.menu_map -> {
                     val intent = Intent(this@MainActivity, MapsActivity::class.java)
                     startActivity(intent)
                     true
@@ -94,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getList(){
+    private fun getList() {
         viewModel.getSession().observe(this) { user ->
             if (!user.isLogin) {
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
@@ -111,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             is ResultState.Success -> {
-                                setAllStory(result.data.listStory)
+                                setAllStory()
                                 showLoading(false)
                                 showToast(result.data.message)
                             }
@@ -127,17 +125,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setAllStory(list: List<ListStoryItem>) {
-        lifecycleScope.launch {
-            adapter = StoryAdapter()
-            val layoutManager = LinearLayoutManager(this@MainActivity)
-            binding.rvListStory.layoutManager = layoutManager
-            binding.rvListStory.adapter = adapter
-            adapter.submitList(list)
+    private fun setAllStory() {
+        adapter = StoryAdapter()
+        val layoutManager = LinearLayoutManager(this@MainActivity)
+        binding.rvListStory.layoutManager = layoutManager
+        binding.rvListStory.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
+        viewModel.story.observe(this) {
+            adapter.submitData(lifecycle, it)
         }
+
     }
 
-    private fun getThemeSetting(){
+    private fun getThemeSetting() {
         viewModel.getThemeSetting().observe(this) { mode: Boolean ->
             isDarkModeActive = mode
             if (isDarkModeActive) {

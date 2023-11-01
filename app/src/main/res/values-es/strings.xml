@@ -58,6 +58,7 @@
     <string name="terrain_type">Terrain</string>
     <string name="hybrid_type">Hybrid</string>
     <string name="night_type">Night Dark</string>
+    <string name="retry">coba lagi</string>
 
 
 </resources>

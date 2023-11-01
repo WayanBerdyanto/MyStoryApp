@@ -1,8 +1,15 @@
 package com.dicoding.mystoryapp.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.dicoding.mystoryapp.ResultState
+import com.dicoding.mystoryapp.data.StoryPagingSource
 import com.dicoding.mystoryapp.data.remote.response.DetailStoryResponse
+import com.dicoding.mystoryapp.data.remote.response.ListStoryItem
 import com.dicoding.mystoryapp.data.remote.response.LoginResponse
 import com.dicoding.mystoryapp.data.remote.response.PostStoriesResponse
 import com.dicoding.mystoryapp.data.remote.response.RegisterResponse
@@ -64,6 +71,17 @@ class UserRepository private constructor(
         }
     }
 
+    fun getStory(): LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService)
+            }
+        ).liveData
+    }
+
     fun getDetailStories(id: String) = liveData {
         emit(ResultState.Loading)
         try {
@@ -92,10 +110,10 @@ class UserRepository private constructor(
         }
     }
 
-    fun getStoriesWithLocation(location: Int) = liveData {
+    fun getStoriesWithLocation() = liveData {
         emit(ResultState.Loading)
         try {
-            val successResponse = apiService.getStoriesWithLocation(location)
+            val successResponse = apiService.getStoriesWithLocation()
             emit(ResultState.Success(successResponse))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()

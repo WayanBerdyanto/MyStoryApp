@@ -56,14 +56,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
 
-        val jakarta = LatLng(-6.175372, 106.827194)
-        mMap.addMarker(
-            MarkerOptions()
-                .position(jakarta)
-                .title("Jakarta City")
-                .snippet("Monas Monumen Nasional")
-        )
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 15f))
+//        val jakarta = LatLng(-6.175372, 106.827194)
+//        mMap.addMarker(
+//            MarkerOptions()
+//                .position(jakarta)
+//                .title("Jakarta City")
+//                .snippet("Monas Monumen Nasional")
+//        )
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 15f))
 
 
         mMap.setOnPoiClickListener { pointOfInterest ->
@@ -78,7 +78,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         getMyLocation()
         setMapStyle()
         viewModel.getSession().observe(this){
-            addAnyMarker()
+            if (it.isLogin){
+                addAnyMarker()
+            }
         }
     }
 
@@ -147,7 +149,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 //    Show Marker With LatLngBounds
     private fun addAnyMarker() {
-        viewModel.getStoriesWithLocation(1).observe(this) { result ->
+        viewModel.getStoriesWithLocation().observe(this) { result ->
             if (result != null) {
                 when (result) {
                     is ResultState.Loading -> {
