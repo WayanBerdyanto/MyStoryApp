@@ -2,12 +2,13 @@ package com.dicoding.mystoryapp.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.dicoding.mystoryapp.ResultState
-import com.dicoding.mystoryapp.data.StoryPagingSource
+import com.dicoding.mystoryapp.data.remote.StoryRemoteMediator
 import com.dicoding.mystoryapp.data.remote.response.DetailStoryResponse
 import com.dicoding.mystoryapp.data.remote.response.ListStoryItem
 import com.dicoding.mystoryapp.data.remote.response.LoginResponse
@@ -15,6 +16,7 @@ import com.dicoding.mystoryapp.data.remote.response.PostStoriesResponse
 import com.dicoding.mystoryapp.data.remote.response.RegisterResponse
 import com.dicoding.mystoryapp.data.remote.response.StoriesResponse
 import com.dicoding.mystoryapp.data.remote.retrofit.ApiService
+import com.dicoding.mystoryapp.database.StoryDatabase
 import com.dicoding.mystoryapp.pref.UserModel
 import com.dicoding.mystoryapp.pref.UserPreference
 import com.google.gson.Gson
@@ -24,6 +26,7 @@ import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class UserRepository private constructor(
+    private val database: StoryDatabase,
     private val apiService: ApiService,
     private val userPreference: UserPreference
 ) {
@@ -54,7 +57,6 @@ class UserRepository private constructor(
         } catch (e: Exception) {
             emit(ResultState.Error(e.message.toString()))
         }
-
     }
 
     fun getAllStory() = liveData {
@@ -72,12 +74,14 @@ class UserRepository private constructor(
     }
 
     fun getStory(): LiveData<PagingData<ListStoryItem>> {
+        @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
-                pageSize = 5
+                pageSize = 15
             ),
+            remoteMediator = StoryRemoteMediator(database, apiService),
             pagingSourceFactory = {
-                StoryPagingSource(apiService)
+                database.storyDao().getAllStory()
             }
         ).liveData
     }
@@ -148,9 +152,10 @@ class UserRepository private constructor(
 
     companion object {
         fun getInstance(
+            database: StoryDatabase,
             apiService: ApiService,
             userPreference: UserPreference
-        ): UserRepository = UserRepository(apiService, userPreference)
+        ): UserRepository = UserRepository(database, apiService, userPreference)
 
     }
 }

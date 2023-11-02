@@ -2,6 +2,7 @@ package com.dicoding.mystoryapp.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import androidx.recyclerview.widget.DiffUtil
 import com.dicoding.mystoryapp.data.remote.response.ListStoryItem
 import com.dicoding.mystoryapp.data.remote.retrofit.ApiService
 
@@ -28,7 +29,16 @@ class StoryPagingSource(private val apiService: ApiService) : PagingSource<Int, 
     }
 
 
-    private companion object {
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListStoryItem>() {
+            override fun areItemsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+                return oldItem== newItem
+            }
+        }
         const val INITIAL_PAGE_INDEX = 1
     }
 }

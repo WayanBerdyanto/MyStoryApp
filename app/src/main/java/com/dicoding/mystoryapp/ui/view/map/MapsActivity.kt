@@ -56,15 +56,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
 
-//        val jakarta = LatLng(-6.175372, 106.827194)
-//        mMap.addMarker(
-//            MarkerOptions()
-//                .position(jakarta)
-//                .title("Jakarta City")
-//                .snippet("Monas Monumen Nasional")
-//        )
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 15f))
-
 
         mMap.setOnPoiClickListener { pointOfInterest ->
             val poiMarker = mMap.addMarker(

@@ -36,6 +36,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += listOf("-Xopt-in=kotlin.RequiresOptIn")
     }
 
     buildFeatures{
@@ -70,7 +71,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.core:core-splashscreen:1.0.0")
 
-
     //room
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0")
     implementation ("androidx.room:room-runtime:2.5.0-alpha02")
@@ -78,4 +78,15 @@ dependencies {
 
 //    Pagging
     implementation("androidx.paging:paging-runtime-ktx:3.1.0")
+    implementation("androidx.room:room-paging:2.4.0-rc01")
+    implementation ("androidx.room:room-ktx:2.4.0-rc01")
+    kapt ("androidx.room:room-compiler:2.6.0-rc01")
+
+
+//    Unit Testing Paging 3
+    testImplementation("androidx.arch.core:core-testing:2.1.0") // InstantTaskExecutorRule
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1") //TestDispatcher
+    testImplementation("org.mockito:mockito-core:3.12.4")
+    testImplementation("org.mockito:mockito-inline:3.12.4")
+
 }

@@ -49,7 +49,7 @@ class StoryAdapter : PagingDataAdapter<ListStoryItem, StoryAdapter.ViewHolder>(D
                     oldItem: ListStoryItem,
                     newItem: ListStoryItem
                 ): Boolean {
-                    return oldItem.name == newItem.name
+                    return oldItem == newItem
                 }
 
                 @SuppressLint("DiffUtilEquals")
@@ -57,7 +57,7 @@ class StoryAdapter : PagingDataAdapter<ListStoryItem, StoryAdapter.ViewHolder>(D
                     oldItem: ListStoryItem,
                     newItem: ListStoryItem
                 ): Boolean {
-                    return oldItem == newItem
+                    return oldItem.id == newItem.id
                 }
             }
     }
