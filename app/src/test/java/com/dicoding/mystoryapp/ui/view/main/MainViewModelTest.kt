@@ -15,7 +15,9 @@ import com.dicoding.mystoryapp.getOrAwaitValue
 import com.dicoding.mystoryapp.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,7 +27,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class MainViewModelTest{
+class MainViewModelTest {
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
@@ -36,7 +38,7 @@ class MainViewModelTest{
     private lateinit var userRepository: UserRepository
 
     @Test
-    fun `when Get Quote Should Not Null and Return Data`() = runTest {
+    fun `when Get Story Should Not Null and Return Data`() = runTest {
         val dummyQuote = DataDummy.generateDummyStoryResponse()
         val data: PagingData<ListStoryItem> = StoriesPagingSource.snapshot(dummyQuote)
         val expectedStory = MutableLiveData<PagingData<ListStoryItem>>()
@@ -52,18 +54,34 @@ class MainViewModelTest{
             workerDispatcher = Dispatchers.Main,
         )
         differ.submitData(actualStory)
+
+        Assert.assertNotNull(differ.snapshot())
+        Assert.assertEquals(dummyQuote.size, differ.snapshot().size)
+        Assert.assertEquals(dummyQuote[0], differ.snapshot()[0])
     }
+
     @Test
     fun `when the logout session has been cleared`() = runTest {
-        `when`(userRepository.logout()).thenReturn(Unit)
+        launch {
+            `when`(userRepository.logout()).thenReturn(Unit)
+        }
     }
 }
+
+val noopListUpdateCallback = object : ListUpdateCallback {
+    override fun onInserted(position: Int, count: Int) {}
+    override fun onRemoved(position: Int, count: Int) {}
+    override fun onMoved(fromPosition: Int, toPosition: Int) {}
+    override fun onChanged(position: Int, count: Int, payload: Any?) {}
+}
+
 class StoriesPagingSource : PagingSource<Int, MutableList<List<ListStoryItem>>>() {
     companion object {
         fun snapshot(items: List<ListStoryItem>): PagingData<ListStoryItem> {
             return PagingData.from(items)
         }
     }
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MutableList<List<ListStoryItem>>> {
         return LoadResult.Page(emptyList(), 0, 1)
     }
@@ -71,10 +89,4 @@ class StoriesPagingSource : PagingSource<Int, MutableList<List<ListStoryItem>>>(
     override fun getRefreshKey(state: PagingState<Int, MutableList<List<ListStoryItem>>>): Int? {
         return 0
     }
-}
-val noopListUpdateCallback = object : ListUpdateCallback {
-    override fun onInserted(position: Int, count: Int) {}
-    override fun onRemoved(position: Int, count: Int) {}
-    override fun onMoved(fromPosition: Int, toPosition: Int) {}
-    override fun onChanged(position: Int, count: Int, payload: Any?) {}
 }

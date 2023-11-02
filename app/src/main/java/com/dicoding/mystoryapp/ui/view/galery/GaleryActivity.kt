@@ -1,4 +1,4 @@
-package com.dicoding.mystoryapp.ui.galery
+package com.dicoding.mystoryapp.ui.view.galery
 
 import android.Manifest
 import android.content.Intent

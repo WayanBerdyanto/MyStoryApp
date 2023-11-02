@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.mystoryapp.di.Injection
 import com.dicoding.mystoryapp.repository.UserRepository
-import com.dicoding.mystoryapp.ui.galery.GalleryViewModel
+import com.dicoding.mystoryapp.ui.view.galery.GalleryViewModel
 import com.dicoding.mystoryapp.ui.view.detail.DetailViewModel
 import com.dicoding.mystoryapp.ui.view.login.LoginViewModel
 import com.dicoding.mystoryapp.ui.view.main.MainViewModel

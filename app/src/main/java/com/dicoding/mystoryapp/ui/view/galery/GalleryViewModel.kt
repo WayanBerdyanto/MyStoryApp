@@ -1,4 +1,4 @@
-package com.dicoding.mystoryapp.ui.galery
+package com.dicoding.mystoryapp.ui.view.galery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

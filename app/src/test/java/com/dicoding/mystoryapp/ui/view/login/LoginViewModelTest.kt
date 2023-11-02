@@ -37,10 +37,10 @@ class LoginViewModelTest {
         val email = "example@gmail.com"
         val password = "2121"
         try {
-            val expectedNews = MutableLiveData<ResultState<LoginResponse>>()
-            `when`(userRepository.login(email, password)).thenReturn(expectedNews)
-            val actualNews = loginViewModel.login(email, password).observeForever(observer)
-            Assert.assertNotNull(actualNews)
+            val expectedLogin = MutableLiveData<ResultState<LoginResponse>>()
+            `when`(userRepository.login(email, password)).thenReturn(expectedLogin)
+            val actualLogin= loginViewModel.login(email, password).observeForever(observer)
+            Assert.assertNotNull(actualLogin)
         } finally {
             loginViewModel.login(email, password).removeObserver(observer)
         }

@@ -16,7 +16,7 @@ import com.dicoding.mystoryapp.databinding.ActivityMainBinding
 import com.dicoding.mystoryapp.ui.LoadingStateAdapter
 import com.dicoding.mystoryapp.ui.StoryAdapter
 import com.dicoding.mystoryapp.ui.ViewModelFactory
-import com.dicoding.mystoryapp.ui.galery.GaleryActivity
+import com.dicoding.mystoryapp.ui.view.galery.GaleryActivity
 import com.dicoding.mystoryapp.ui.view.login.LoginActivity
 import com.dicoding.mystoryapp.ui.view.map.MapsActivity
 
