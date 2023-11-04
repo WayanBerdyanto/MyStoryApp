@@ -77,7 +77,7 @@ class UserRepository private constructor(
         @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
-                pageSize = 15
+                pageSize = 5
             ),
             remoteMediator = StoryRemoteMediator(database, apiService),
             pagingSourceFactory = {
